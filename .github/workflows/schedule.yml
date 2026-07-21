@@ -1,0 +1,31 @@
+name: Arabam Scraper Schedule
+
+on:
+  schedule:
+    - cron: '0 2 */2 * *'  # Her 2 günde bir, saat 2:00
+  workflow_dispatch:  # Manual trigger için
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Repo'yu indir
+        uses: actions/checkout@v4
+      
+      - name: Python 3.11 kur
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Paketleri yükle
+        run: pip install -r requirements.txt
+      
+      - name: Scraper'ı çalıştır
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python run_daily.py
+      
+      - name: Hata olursa mesaj gönder
+        if: failure()
+        run: echo "Scraper başarısız!" 

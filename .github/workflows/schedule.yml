@@ -24,8 +24,9 @@ jobs:
       - name: Scraper'ı çalıştır
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: python run_daily.py
       
       - name: Hata olursa mesaj gönder
         if: failure()
-        run: echo "Scraper başarısız!" 
+        run: echo "Scraper başarısız!"

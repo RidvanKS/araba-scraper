@@ -2441,34 +2441,11 @@ if __name__ == "__main__":
 
     tracker = ArabamStokTakip(db_config=DB_CONFIG)
 
-    print("\n╔══════════════════════════════════════════════════╗")
-    print("║  🚗 ARABAM.COM STOK TAKİP - MOD SEÇİMİ         ║")
-    print("╠══════════════════════════════════════════════════╣")
-    print("║  1. Günlük tam stok takip (5-6 Saat)           ║")
-    print("║     → Tüm siteyi tarar, yeni/satılan bulur     ║")
-    print("║                                                  ║")
-    print("║  2. Sadece yeni ilanlar (Hızlı)                ║")
-    print("║     → Son 24 saati çeker, stok takibi yapmaz   ║")
-    print("║                                                  ║")
-    print("║  3. 🛠️ Eksik Satılanları Kurtar (Saniyeler)    ║")
-    print("║     → Sadece veritabanındaki tarihlere bakar   ║")
-    print("║     → Hata sonrası yarım kalanı tamamlar       ║")
-    print("╚══════════════════════════════════════════════════╝")
-
-    secim = input("\nSeçiminiz (1/2/3): ").strip()
-
     try:
-        if secim == '1':
-            tracker.run()
-        elif secim == '2':
-            tracker.run_sadece_yeniler()
-        elif secim == '3':
-            tracker.run_satilan_kurtarma()
-        else:
-            print("❌ Geçersiz seçim! 1, 2 veya 3 girin.")
+        tracker.run()
     except KeyboardInterrupt:
         print("\n⛔ Çıkılıyor...")
     except Exception as e:
         print(f"\n❌ Kritik hata: {e}")
         import traceback
-        traceback.print_exc() 
+        traceback.print_exc()
